@@ -45,4 +45,17 @@ async function updateSale(req, res) {
   }
 }
 
-module.exports = { getAllSales, findSaleById, insertSale, updateSale };
+async function deleteSale(req, res) {
+  try {
+    console.log('controller');
+    const { id } = req.params;
+    const { err, deleteOne } = await salesService.deleteSale(id);
+    console.log(deleteOne);
+    if (err) return res.status(422).json({ err });
+    return res.status(200).json(deleteOne);
+  } catch (err) { 
+    return res.status(500).json({ message: 'deu ruim' });
+  }
+}
+
+module.exports = { getAllSales, findSaleById, insertSale, updateSale, deleteSale };
