@@ -4,6 +4,9 @@ const { validateSales } = require('../validations/validations');
 
 router.get('/', salesController.getAllSales);
 router.post('/', validateSales, salesController.insertSale);
+router.get('/:id', salesController.findSaleById);
+router.put('/:id', validateSales, salesController.updateSale);
+router.delete('/:id', salesController.deleteSale);
 
 module.exports = router;
  */

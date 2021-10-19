@@ -12,6 +12,7 @@ async function getAll(_req, res) {
 async function findById(req, res) {
   try {
     const { id } = req.params;
+    console.log({ req });
     const { err, findOne } = await productsServices.findById(id);
     if (err) return res.status(422).json({ err });
 
