@@ -47,4 +47,17 @@ async function updateProducts(req, res) {
   }
 }
 
-module.exports = { getAll, findById, insertProduct, updateProducts };
+async function deleteProduct(req, res) {
+  try {
+    const { id } = req.params;
+    const { name, quantity } = req.body;
+    const { err, deleteOne } = await productsServices.deleteProduct(id, name, quantity);
+    if (err) return res.status(422).json({ err });
+    
+    return res.status(200).json(deleteOne);
+  } catch (err) {
+    return res.status(500).json({ message: 'deu ruim geral' });
+  }
+}
+
+module.exports = { getAll, findById, insertProduct, updateProducts, deleteProduct };
