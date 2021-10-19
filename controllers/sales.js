@@ -9,6 +9,18 @@ async function getAllSales(req, res) {
   }
 }
 
+async function findSaleById(req, res) {
+  try {
+    const { id } = req.params;
+    const { err, findSale } = await salesService.findSaleById(id);
+    if (err) return res.status(404).json({ err });
+
+    return res.status(200).json(findSale);
+  } catch (err) {
+    return res.status(500).json({ message: 'deu ruim' });
+  }
+}
+
 async function insertSale(req, res) {
   try {
     const itensSold = req.body;
@@ -20,4 +32,4 @@ async function insertSale(req, res) {
   }
 }
 
-module.exports = { getAllSales, insertSale };
+module.exports = { getAllSales, findSaleById, insertSale };
