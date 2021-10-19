@@ -27,4 +27,16 @@ async function updateSale(id, itensSold) {
   return { update };
 }
 
-module.exports = { getAllSales, findSaleById, insertSale, updateSale };
+async function deleteSale(id) {
+  const itens = await salesModels.findSaleById(id);
+  if (!itens) {
+    return { err: { code: codes.invalidData, message: errors.saleIdFormat } };
+  }
+  const deleteOne = await salesModels.deleteSale(id);
+  if (deleteOne !== true) {
+    return { err: { code: codes.invalidData, message: errors.invalidIdOrQuantity } };
+  }
+  return itens;
+}
+
+module.exports = { getAllSales, findSaleById, insertSale, updateSale, deleteSale };
