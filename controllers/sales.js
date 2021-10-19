@@ -1,5 +1,14 @@
 const salesService = require('../services/sales');
 
+async function getAllSales(req, res) {
+  try {
+    const allSales = await salesService.getAllSales();
+    return res.status(200).json(allSales);
+  } catch (err) {
+    return res.status(500).json({ message: 'deu ruim geral' });
+  }
+}
+
 async function insertSale(req, res) {
   try {
     const itensSold = req.body;
@@ -11,4 +20,4 @@ async function insertSale(req, res) {
   }
 }
 
-module.exports = { insertSale };
+module.exports = { getAllSales, insertSale };
