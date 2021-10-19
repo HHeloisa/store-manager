@@ -6,6 +6,13 @@ async function getAll() {
   return { products: allProducts };
 }
 
+async function findById(id) {
+  const findOne = await productsModel.findById(id);
+  if (!findOne) return { err: { code: codes.invalidData, message: errors.productIdFormat } };
+
+  return { findOne };
+}
+
 async function insertProduct(name, quantity) {
   const checkName = await productsModel.findByName(name);
     if (checkName) {
@@ -16,4 +23,4 @@ async function insertProduct(name, quantity) {
   return { newProductService };
 }
 
-module.exports = { getAll, insertProduct };
+module.exports = { getAll, insertProduct, findById };
