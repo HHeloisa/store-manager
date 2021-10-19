@@ -1,5 +1,14 @@
 const productsServices = require('../services/products');
 
+async function getAll(_req, res) {
+  try {
+    const allProducts = await productsServices.getAll();
+    return res.status(200).json(allProducts);
+  } catch (err) {
+    return res.status(500).json({ message: 'não deu' });
+  }
+}
+
 async function insertProduct(req, res) {
   try {
   const { name, quantity } = req.body;
@@ -12,4 +21,4 @@ async function insertProduct(req, res) {
   }
 }
 
-module.exports = { insertProduct };
+module.exports = { getAll, insertProduct };
