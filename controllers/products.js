@@ -9,6 +9,18 @@ async function getAll(_req, res) {
   }
 }
 
+async function findById(req, res) {
+  try {
+    const { id } = req.params;
+    const { err, findOne } = await productsServices.findById(id);
+    if (err) return res.status(422).json({ err });
+
+    return res.status(200).json(findOne);
+  } catch (err) {
+    return res.status(500).json({ message: 'deu ruim geral' });
+  }
+}
+
 async function insertProduct(req, res) {
   try {
   const { name, quantity } = req.body;
@@ -21,4 +33,4 @@ async function insertProduct(req, res) {
   }
 }
 
-module.exports = { getAll, insertProduct };
+module.exports = { getAll, findById, insertProduct };
