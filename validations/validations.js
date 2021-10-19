@@ -9,7 +9,6 @@ const isString = (value) => typeof value === 'string';
 ========================================================================== */
 
 const validateProducts = (req, res, next) => {
-  console.log('validateProductsMD');
   const { name, quantity } = req.body;
     if (lengthMin(name, 5)) {
       return res.status(422).json({ err: { code: codes.invalidData, message: errors.nameLength } });
