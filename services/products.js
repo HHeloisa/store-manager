@@ -23,4 +23,9 @@ async function insertProduct(name, quantity) {
   return { newProductService };
 }
 
-module.exports = { getAll, insertProduct, findById };
+async function updateProduct(id, name, quantity) {
+  const update = await productsModel.updateProduct(id, name, quantity);
+ return { update };
+}
+
+module.exports = { getAll, insertProduct, findById, updateProduct };
