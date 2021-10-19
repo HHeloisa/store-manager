@@ -28,4 +28,10 @@ async function updateProduct(id, name, quantity) {
  return { update };
 }
 
-module.exports = { getAll, insertProduct, findById, updateProduct };
+async function deleteProduct(id, name, quantity) {
+  const deleteOne = await productsModel.deleteProduct(id, name, quantity);
+  if (!deleteOne) return { err: { code: codes.invalidData, message: errors.productIdFormat } };
+  return { deleteOne };
+}
+
+module.exports = { getAll, insertProduct, findById, updateProduct, deleteProduct };
