@@ -34,4 +34,17 @@ async function insertProduct(req, res) {
   }
 }
 
-module.exports = { getAll, findById, insertProduct };
+async function updateProducts(req, res) {
+  try {
+    const { id } = req.params;
+    const { name, quantity } = req.body;
+
+    const { err, update } = await productsServices.updateProduct(id, name, quantity);
+      if (err) return res.status(422).json({ err });
+    return res.status(200).json(update);
+  } catch (err) {
+    return res.status(500).json({ message: 'deu ruim geral' });
+  }
+}
+
+module.exports = { getAll, findById, insertProduct, updateProducts };
