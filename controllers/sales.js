@@ -32,4 +32,17 @@ async function insertSale(req, res) {
   }
 }
 
-module.exports = { getAllSales, findSaleById, insertSale };
+async function updateSale(req, res) {
+  try { 
+    const itensSold = req.body;
+    const { id } = req.params;
+    const { err, update } = await salesService.updateSale(id, itensSold);
+    if (err) return res.status(422).json({ err });
+
+    return res.status(200).json(update);
+  } catch (erro) {
+    return res.status(500).json({ message: 'deu ruim' });
+  }
+}
+
+module.exports = { getAllSales, findSaleById, insertSale, updateSale };
