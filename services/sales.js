@@ -19,4 +19,12 @@ async function insertSale(itensSold) {
   return { insertedSale };
 }
 
-module.exports = { getAllSales, findSaleById, insertSale };
+async function updateSale(id, itensSold) {
+  const update = await salesModels.updateSale(id, itensSold);
+  if (!update) { 
+    return { err: { code: codes.invalidData, message: errors.invalidIdOrQuantity } };
+    }
+  return { update };
+}
+
+module.exports = { getAllSales, findSaleById, insertSale, updateSale };
